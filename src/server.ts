@@ -28,6 +28,29 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
   /**************************************************************************** */
+  app.get("/filteredimage", async (req, res) => {
+    // Init image url request
+    const imageUrl = req.query.image_url as string;
+
+    // Get image if url exist
+    if (imageUrl) {
+      // Get image for url
+      const imageData = await filterImageFromURL(imageUrl);
+
+      // Reponse image data
+      res.sendFile(imageData, function (err) {
+        // If can not read image response with status 400
+        if (err) {
+          res.status(400).send('Image could not be read!');
+        } else {
+          // Delete any files on the server on finish of the response
+          deleteLocalFiles([imageData]);
+        }
+      });
+    } else {
+      res.status(404).send("Image url not found!");
+    }
+  });
 
   //! END @TODO1
   
