@@ -37,15 +37,17 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
       // Get image for url
       const imageData = await filterImageFromURL(imageUrl);
 
+      // Stop process if can not read image from url
+      if (!imageData) {
+        return res.status(400).send('Image could not be read!');
+      }
+
       // Reponse image data
-      res.sendFile(imageData, function (err) {
-        // If can not read image response with status 400
-        if (err) {
-          res.status(400).send('Image could not be read!');
-        } else {
-          // Delete any files on the server on finish of the response
-          deleteLocalFiles([imageData]);
-        }
+      res.sendFile(imageData);
+
+      // Delete any files on the server on finish of the response
+      res.on('finish', function () {
+        deleteLocalFiles([imageData]);
       });
     } else {
       res.status(404).send("Image url not found!");
