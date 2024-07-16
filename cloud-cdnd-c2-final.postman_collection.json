@@ -6,15 +6,15 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:8082/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+			"name": "http://{{EB_HOST}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{HOST}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
+					"raw": "http://{{EB_HOST}}/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg",
 					"protocol": "http",
 					"host": [
-						"{{HOST}}"
+						"{{EB_HOST}}"
 					],
 					"path": [
 						"filteredimage"
@@ -57,6 +57,11 @@
 			"id": "1df3d31a-de30-494b-a3d0-f1228dd8713c",
 			"key": "HOST",
 			"value": "localhost:8082",
+			"type": "string"
+		},
+    {
+			"key": "EB_HOST",
+			"value": "image-filter-starter-code-dev.us-east-1.elasticbeanstalk.com",
 			"type": "string"
 		}
 	]
